@@ -16,28 +16,27 @@ let answers = [
 ]
 
 const showAnswer = () => {
-    answer.textContent = answers[Math.floor(Math.random() * answers.length)]
+	answer.innerHTML = `<span>Answer:</span> ${answers[Math.floor(Math.random() * answers.length)]}`
 }
 
 const checkQuestion = () => {
-    answer.textContent = ''
-    error.textContent = ''
+	answer.textContent = ''
+	error.textContent = ''
 
-    if(input.value === '') {
-        error.textContent = 'You have to ask a question!'
-    } else if(!input.value.endsWith('?')){
-        error.textContent = "The question must end with '?'."
-    } else {
-       showAnswer()
-    }
+	if (input.value !== '' && input.value.slice(-1) === '?') {
+		showAnswer()
+	} else if (input.value !== '' && input.value.slice(-1) !== '?') {
+		error.textContent = "The question must end with '?'."
+	} else {
+		error.textContent = 'You have to ask a question!'
+	}
 
-    img.classList.remove('shake-animation');
+	img.classList.remove('shake-animation')
 }
 
-
 const shakeBill = () => {
-    img.classList.add('shake-animation');
-    setTimeout(checkQuestion, 1000);
+	img.classList.add('shake-animation')
+	setTimeout(checkQuestion, 1000)
 }
 
 img.addEventListener('click', shakeBill)
